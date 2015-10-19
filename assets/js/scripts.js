@@ -285,42 +285,48 @@ function AppViewModel() {
         self.Ajax().sendFeedback(postData, callback);
     }
 
-    self.search = function(){
+    self.search = function() {
         var start =
             "[";
         var search_string_param =
-            self.search_text_value() === "" ?"":
-                "{\"paramNames\":[\"title\",\"descriptionShort\",\"description\"],\"paramValue\":\""+self.search_text_value().replace(/[ '"-]/g,'%');+"\"}";
+            self.search_text_value() === "" ? "" :
+            "{\"paramNames\":[\"title\",\"descriptionShort\",\"description\"],\"paramValue\":\"" + self.search_text_value().replace(/[ '"-]/g, '%') + "\"}";
         var search_current_activity_param =
-            (self.currentActivity() === currentActivity_start ||  self.currentActivity() === currentActivity_defult ) ? "":
-                "{\"paramNames\":[\"activity\"],\"paramValue\":\""+self.currentActivity()+"\"}";
+            (self.currentActivity() === currentActivity_start || self.currentActivity() === currentActivity_defult ) ? "" :
+            "{\"paramNames\":[\"activity\"],\"paramValue\":\"" + self.currentActivity() + "\"}";
         var search_event_type_param =
-            (self.eventType() === eventType_start ||  self.eventType() === eventType_defult) ? "":
-                "{\"paramNames\":[\"type\"],\"paramValue\":\""+self.eventType()+"\"}";
+            (self.eventType() === eventType_start || self.eventType() === eventType_defult) ? "" :
+            "{\"paramNames\":[\"type\"],\"paramValue\":\"" + self.eventType() + "\"}";
         var end = "]";
 
-        var search_values = "";
-        search_values =
-            search_values +
-            (search_values === "" || search_string_param === "" ? search_string_param: ","+search_string_param);
-        search_values =
-            search_values +
-            (search_values === "" || search_current_activity_param === "" ? search_current_activity_param
-                : ","+search_current_activity_param);
-        search_values =
-            search_values + 
-            (search_values === "" || search_event_type_param === "" ? search_event_type_param
-                : ","+search_event_type_param);
-        var all =
-            start
-            +search_values
-            +end;
+        var composeSearch = function (search_values, new_value) {
+            search_values =
+                search_values +
+                (search_values === "" || new_value === "" ? new_value : "," + new_value);
+            return search_values;
+        }
 
-        self.Ajax().searchEvent(all,
-            function (data) {
-                self.events.removeAll();
-                self.events(data);
-            });
+        var search_values = "";
+        search_values = composeSearch(search_values, search_string_param);
+        search_values = composeSearch(search_values, search_current_activity_param);
+        search_values = composeSearch(search_values, search_event_type_param);
+
+        if (search_values === "") {
+            self.events.removeAll();
+            self.eventsBatch(0);
+            self.loadEvents();
+        } else {
+            var all =
+                start
+                + search_values
+                + end;
+
+            self.Ajax().searchEvent(all,
+                function (data) {
+                    self.events.removeAll();
+                    self.events(data);
+                });
+        }
         currentActivity_used = self.currentActivity;
         eventType_used = self.eventType;
         search_text_value_used = self.search_text_value;
