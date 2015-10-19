@@ -1,0 +1,139 @@
+<!-- Banner START -->
+<div class="container-fluid" id="create-event-block">
+    <div class="row">
+        <div class="col-md-12 main-background">
+            <div class="col-md-6 col-md-offset-3">                
+                <div class="row">
+                    <!--<form method="POST" id="upload-photo-form" enctype="multipart/form-data">
+                        <input type="file" name="file" id="upload-photo"><br/>
+                        <input type="submit" class="btn btn-default" value="Завантажити">
+                    </form> -->
+                    <br/>
+                    <form id="create-event-form" role="form" data-toggle="validator">                        
+                        <div class="form-group">
+                            <label class="control-label">Назва курсу/вакансії</label>
+                            <input type="text" data-error="Заповніть це поле" class="form-control" required name="title">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Короткий опис (одне речення)</label>
+                            <input type="text" data-error="Заповніть це поле" class="form-control" required name="descriptionShort">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Відповідальна особа</label>
+                            <input type="text" data-error="Заповніть це поле" class="form-control" name="manager">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group data-picker">
+                            <label class="control-label">Дата початку</label>
+                            <input type="text" data-bind="attr: {'value': AppDate().getFullDate2()}" data-error="Заповніть це поле" class="form-control" name="startDate" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group time-picker">
+                            <label class="control-label">Час початку</label>
+                            <input type="text" data-error="Заповніть це поле" class="form-control" name="startTime">
+                            <span class="help-block with-errors"></span>
+                        </div>                        
+                        <div class="form-group data-picker">
+                            <label class="control-label">Дата закінчення</label>
+                            <input type="text" data-bind="attr: {'value': AppDate().getFullDate2()}" data-error="Заповніть це поле" class="form-control" name="endDate">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group time-picker">
+                            <label class="control-label">Час закінчення</label>
+                            <input type="text" data-error="Заповніть це поле" class="form-control" name="endTime">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <!--div class="form-group">
+                            <label class="control-label">Теги</label>
+                            <input type="text" data-error="Заповніть це поле" class="form-control" placeholder="новини, актуально">
+                            <span class="help-block with-errors"></span>
+                        </div-->
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span data-bind="text: eventType()"></span>
+                                    <span class="caret"></span>  
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a data-bind="click: setEventType">Семінар</a></li>
+                                    <li><a data-bind="click: setEventType">Майстер-клас</a></li>
+                                    <li><a data-bind="click: setEventType">Стажування</a></li>
+                                    <li><a data-bind="click: setEventType">Презентація</a></li>
+                                    <li><a data-bind="click: setEventType">Курс навчання</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span data-bind="text: currentActivity()"></span>
+                                    <span class="caret"></span>  
+                                </button>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a data-bind="click: setActivity">IT</a></li>
+                                                <li><a data-bind="click: setActivity">HR</a></li>
+                                                <li><a data-bind="click: setActivity">Фінанси</a></li>
+                                                <li><a data-bind="click: setActivity">Банк</a></li>
+                                                <li><a data-bind="click: setActivity">Дизайн</a></li>
+                                                <li><a data-bind="click: setActivity">Страхування</a></li>
+                                                <li><a data-bind="click: setActivity">Маркетинг </a></li>
+                                                <li><a data-bind="click: setActivity">Інженерія</a></li>                                        
+                                                <li><a data-bind="click: setActivity">Медицина</a></li>
+                                                <li><a data-bind="click: setActivity">Культура</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a data-bind="click: setActivity">Реклама</a></li>
+                                                <li><a data-bind="click: setActivity">PR</a></li>
+                                                <li><a data-bind="click: setActivity">Сервіс</a></li>
+                                                <li><a data-bind="click: setActivity">Громадські організації</a>
+                                                <li><a data-bind="click: setActivity">Медіа</a></li>
+                                                <li><a data-bind="click: setActivity">Освіта</a></li>
+                                                <li><a data-bind="click: setActivity">Наука</a></li>
+                                                <li><a data-bind="click: setActivity">Прикладні науки</a></li> 
+                                                <li><a data-bind="click: setActivity">Сільське господарство</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a data-bind="click: setActivity">Будівництво</a></li>
+                                                <li><a data-bind="click: setActivity">Архітектура</a></li>
+                                                <li><a data-bind="click: setActivity">Туризм</a></li>
+                                                <li><a data-bind="click: setActivity">Юридична справа</a></li>
+                                                <li><a data-bind="click: setActivity">Зв'язок</a></li>
+                                                <li><a data-bind="click: setActivity">Менеджмент</a></li>
+                                                <li><a data-bind="click: setActivity">Індустрія краси</a></li>
+                                                <li><a data-bind="click: setActivity">Спорт</a></li>
+                                                <li><a data-bind="click: setActivity">Продажі</a></li>                                        
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label">Опис</label>
+                            <textarea class="form-control"  data-error="Заповніть це поле" required name="description"></textarea>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Фото події</label>
+                            <input type="file" name="file" class="form-control" id="upload-photo">
+                        </div>
+                        
+
+                        <button type="submit" class="btn btn-block btn-main-green center-block" data-bind="click: createEvent">Створити</button>
+                    </form>    
+
+                </div>
+            </div>
+        </div>                
+    </div>
+</div>   
+<!-- Banner END -->

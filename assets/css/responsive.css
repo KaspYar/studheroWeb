@@ -1,0 +1,65 @@
+
+@media (min-width: 380px) and (max-width: 768px)
+{
+    .text-box p.intro {
+        font-size: 22px;
+    }
+    .text-box h2 {
+        font-size: 40px;
+    }
+    .text-box h3 {
+        font-size: 16px;}
+    .text-box p a.link-button {
+        padding: 8px 14px;
+        font-size: 13px;}
+    .title h2 {
+
+        font-size: 29px;}
+    .desc p {
+        font-size: 15px;
+        text-align: justify;}
+    .icon-text-box h4 {
+        text-align: center;
+    }
+    .icon-text-box p {
+
+        text-align: center;}
+
+    .btneff {
+
+        margin-top: 15px;
+        width: 20% !important;
+    }
+}
+@media (min-width: 0px) and (max-width: 379px)
+{
+    .text-box p.intro {
+        font-size: 22px;
+    }
+    .text-box h2 {
+        font-size: 20px;
+    }
+    .text-box h3 {
+        font-size: 16px;}
+    .text-box p a.link-button {
+        padding: 8px 14px;
+        font-size: 13px;}
+    .title h2 {
+
+        font-size: 29px;}
+    .desc p {
+        font-size: 15px;
+        text-align: justify;}
+    .icon-text-box h4 {
+        text-align: center;
+    }
+    .icon-text-box p {
+
+        text-align: center;}
+
+    .btneff {
+
+        margin-top: 15px;
+        width: 80% !important;
+    }
+}

@@ -1,0 +1,135 @@
+<div class="container-fluid white-bg" id="event-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 container-first">
+                <h2 class="text-center"  data-bind="text: currentEvent().title"></h2>
+                <div class="col-md-12 container-first-event">
+                    <div class="col-md-6 image-block">
+                        <!-- ko ifnot: currentEvent().image -->
+                        <img src="assets/images/event-icon.jpg"/>
+                        <!-- /ko -->
+                        <!-- ko if: currentEvent().image -->
+                        <img src="" data-bind="attr: {src: 'http://89.184.67.220:8080/images/events/' + currentEvent().image}"/>
+                        <!-- /ko -->
+                    </div>
+                    <div class="col-md-6">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><b>Компанія:</b></td>
+                                    <td data-bind="text: currentEvent().company"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Початок:</b></td>
+                                    <td data-bind="text: currentEvent().startDate"></td>
+                                    <td data-bind="text: currentEvent().startTime"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Кінець:</b></td>
+                                    <td data-bind="text: currentEvent().endDate"></td>
+                                    <td data-bind="text: currentEvent().endTime"></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Відповідальна особа:</b></td>
+                                    <td data-bind="text: currentEvent().manager"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-8 col-md-offset-2 event-content" data-bind="html: currentEvent().description">
+
+                </div>
+            </div>
+            <br/>
+            <button class="btn btn-block btn-main-green center-block" data-bind="click: subscribeToEvent">Підписатись на подію</button>
+
+            <div class="col-sm-12">
+                <h3>Коментарі</h3>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                </div>
+                                <div class="panel-body">
+                                    Panel content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                </div>
+                                <div class="panel-body">
+                                    Panel content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                </div>
+                                <div class="panel-body">
+                                    Panel content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="subscribe-popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Підписатись на подію</h4>
+      </div>
+      <div class="modal-body">
+        <p>Вітаємо!</p>
+        <p>Тепер Ви є учасником цієї події. Вона доступна у вашому списку подій в профайлі</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div><
+</div>

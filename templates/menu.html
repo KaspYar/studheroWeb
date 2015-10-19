@@ -1,0 +1,24 @@
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-2">
+                <span data-bind="click: showMain" class="logo">STUDHERO</span>
+            </div>              
+            <div class="col-md-5" id="menu">
+                <nav>
+                    <ul class="nav navbar-nav menu">                        
+                        <li><a data-bind="click: Nav().showEvents, css: {'active': currentPage() == 'events.php'}">Події та курси</a></li>
+                        <li><a href="" data-bind="click: scrollToFooter">Контакти</a></li>                          
+                    </ul>
+                    <!-- ko ifnot: User().loggedIn() -->
+                    <a class="btn btn-main-green" href="login.php">Увійти</a>
+                    <!-- /ko -->
+                    <!-- ko if: User().loggedIn() -->
+                    <a class="btn btn-main-green" href="profile.php">Профіль</a>
+                    <!-- /ko -->
+                </nav>
+                <div class="glyphicon glyphicon-share" data-bind="click: User().logOut, visible: User().loggedIn()" id="logout-btn"></div>
+            </div>
+        </div>
+    </div>
+</header>

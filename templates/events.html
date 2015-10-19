@@ -1,0 +1,187 @@
+<div class="container-fluid white-bg" id="events">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 container-first events-list">
+                <h2 class="text-center">Події та курси</h2>
+                <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="input-group" id="main-search" >
+                            <input type="text" class="form-control" placeholder="Що ви шукаєте?"
+                                   data-bind="textInput : search_text_value">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 filters-block">
+                    <div class="dropdown col-md-3">
+                        <button class="btn btn-default dropdown-toggle btn-main-green" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span data-bind="text: eventType()"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a data-bind="click: setEventType">Семінар</a></li>
+                            <li><a data-bind="click: setEventType">Майстер-клас</a></li>
+                            <li><a data-bind="click: setEventType">Стажування</a></li>
+                            <li><a data-bind="click: setEventType">Презентація</a></li>
+                            <li><a data-bind="click: setEventType">Курс навчання</a></li>
+                            <li><a data-bind="click: setEventType">Будь-який</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown col-md-3">
+                        <button class="btn btn-default dropdown-toggle btn-main-green" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span data-bind="text: currentActivity()"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu multi-column columns-3" aria-labelledby="dropdownMenu2">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <ul class="multi-column-dropdown">
+                                        <li><a data-bind="click: setActivity">IT</a></li>
+                                        <li><a data-bind="click: setActivity">HR</a></li>
+                                        <li><a data-bind="click: setActivity">Фінанси</a></li>
+                                        <li><a data-bind="click: setActivity">Банк</a></li>
+                                        <li><a data-bind="click: setActivity">Дизайн</a></li>
+                                        <li><a data-bind="click: setActivity">Страхування</a></li>
+                                        <li><a data-bind="click: setActivity">Маркетинг </a></li>
+                                        <li><a data-bind="click: setActivity">Інженерія</a></li>
+                                        <li><a data-bind="click: setActivity">Медицина</a></li>
+                                        <li><a data-bind="click: setActivity">Культура</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4">
+                                    <ul class="multi-column-dropdown">
+                                        <li><a data-bind="click: setActivity">Реклама</a></li>
+                                        <li><a data-bind="click: setActivity">PR</a></li>
+                                        <li><a data-bind="click: setActivity">Сервіс</a></li>
+                                        <li><a data-bind="click: setActivity">Громадські організації</a>
+                                        <li><a data-bind="click: setActivity">Медіа</a></li>
+                                        <li><a data-bind="click: setActivity">Освіта</a></li>
+                                        <li><a data-bind="click: setActivity">Наука</a></li>
+                                        <li><a data-bind="click: setActivity">Прикладні науки</a></li>
+                                        <li><a data-bind="click: setActivity">Сільське господарство</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4">
+                                    <ul class="multi-column-dropdown">
+                                        <li><a data-bind="click: setActivity">Будівництво</a></li>
+                                        <li><a data-bind="click: setActivity">Архітектура</a></li>
+                                        <li><a data-bind="click: setActivity">Туризм</a></li>
+                                        <li><a data-bind="click: setActivity">Юридична справа</a></li>
+                                        <li><a data-bind="click: setActivity">Зв'язок</a></li>
+                                        <li><a data-bind="click: setActivity">Менеджмент</a></li>
+                                        <li><a data-bind="click: setActivity">Індустрія краси</a></li>
+                                        <li><a data-bind="click: setActivity">Спорт</a></li>
+                                        <li><a data-bind="click: setActivity">Продажі</a></li>
+                                        <li><a data-bind="click: setActivity">Будь-яка</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-daterange input-group data-picker">
+                            <input type="text" class="input-sm form-control" name="start" data-bind="attr: {'placeholder': AppDate().getFullDate2()}" />
+                            <span class="input-group-addon">до</span>
+                            <input type="text" class="input-sm form-control" name="end" data-bind="attr: {'placeholder': AppDate().getFullDate2()}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12 event-block add-event-block" data-bind="click: showCreateEvent">
+                    <div class="name">Створити подію</div>
+                    <div class="featured-img">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </div>
+                </div>
+                <!-- ko foreach: events -->
+                <div class="col-md-4 col-sm-6 col-xs-12 event-block">
+                    <a data-bind="click: $root.Nav().showEvent">
+                        <span data-bind="text: $data.objectId" hidden></span>
+                        <div class="name"><span data-bind="text: $data.company"></span>: <span data-bind="text: $data.title"></span></div>
+                        <div class="featured-img">
+                            <div>
+                                <table>
+                                <tbody>
+                                    <tr>
+                                        <td data-bind="text: $data.descriptionShort"></td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="visible: $data.startDate">Початок: </td>
+                                        <td data-bind="text: $data.startDate"></td>
+                                        <td data-bind="text: $data.startTime"></td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="visible: $data.endDate">Кінець:</td>
+                                        <td data-bind="text: $data.endDate"></td>
+                                        <td data-bind="text: $data.endTime"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <!-- ko ifnot: $data.image -->
+                            <img src="assets/images/event-icon.jpg"/>
+                            <!-- /ko -->
+                            <!-- ko if: $data.image -->
+                            <img src="" data-bind="attr: {src: 'http://89.184.67.220:8080/images/events/' + $data.image}"/>
+                            <!-- /ko -->
+                        </div>
+                    </a>
+                </div>
+                <!-- /ko -->
+
+            </div>
+        </div>
+        <button id="load-more-btn" class="btn btn-block btn-main-dark center-block" data-bind="click: loadEvents">Більше подій</button>
+    </div>
+</div>
+<div class="container-fluid green-bg contact-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Зворотній зв'язок</h2>
+                <p class="text-center">Сервіс зовсім новий, і у нас нема багато чого, що ви б хотіли бачити. Діліться вашим досвідом і радьте нам! </p>
+                <p class="text-center">Будемо дуже уважні до ваших побажань!</p>
+                <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+                    <form role="form" data-toggle="validator" id="feedback-form">
+                        <div class="form-group">
+                            <input type="text" data-error="Заповніть це поле" class="form-control form-effect" id="name" placeholder="Ваше ім'я" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" data-error="Введіть коретктний email" class="form-control form-effect" id="email" placeholder="Email" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <textarea type="textarea" data-error="Заповніть це поле" class="form-control form-effect" id="text" placeholder="Тест повідомлення" required></textarea>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-main-dark center-block" data-bind="click: sendFeedback">Відправити</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Contacts END -->
+
+<div class="modal fade" id="feedback-sent-popup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Зворотній зв'язок</h4>
+            </div>
+            <div class="modal-body">
+                <p>Форма відправлена.</p>
+                <p>Ми відповімо Вам у найближчий час.</p>
+                <br/>
+                <p>Дякуємо!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div><
+</div>

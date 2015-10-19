@@ -1,0 +1,181 @@
+<!-- Banner START -->
+<div class="container-fluid" id="registrate-block">
+    <div class="row">
+        <div class="col-md-12 main-background">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="row">
+                    <!-- User -->
+                    <form role="form" data-toggle="validator" data-bind="visible: User().type() == 'student'" id="student-registarte-form">
+                        <div class="form-group">
+                            <label class="control-label">Ім'я</label>
+                            <input type="text" class="form-control" name="name" data-error="Заповніть це поле" placeholder="Ваше ім'я" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Телефон</label>
+                            <input type="tel" pattern="^[0-9]+$" name="phone"  data-error="Некоректний формат" class="form-control" placeholder="380 681 234 566" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="email" class="form-control" name="email" data-error="Некоректний формат" placeholder="yourmail@gmail.com" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Місто</label>
+                            <input type="text" class="form-control"  name="city" data-error="Заповніть це поле" placeholder="Київ" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="password" class="control-label">Пароль</label>
+                            <input type="password" data-minlength="1" name="password" data-error="Заповніть це поле" class="form-control" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Повторіть пароль</label>
+                            <input type="password" data-minlength="1" name="password2" data-error="Заповніть це поле" class="form-control" required>
+                            <span class="help-block with-errors"></span>
+                        </div>    
+                        <button type="submit" class="btn btn-block btn-main-green center-block" data-bind="click: createUser">Зареєструватись</button>
+                    </form>
+                    
+                    
+                    <!-- Company -->
+                    <form role="form" data-toggle="validator" data-bind="visible: User().type() == 'company'" id="company-registarte-form">
+                        <div class="form-group">
+                            <label class="control-label">Назва компанії</label>
+                            <input type="text" class="form-control" name="name" data-error="Заповніть це поле" placeholder="Компанія" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="text" class="form-control" name="email" data-error="Некоректний формат" placeholder="youremail@gmail.com" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Телефон</label>
+                            <input type="text" class="form-control"  name="phone" data-error="Некоректний формат" placeholder="Компанія" required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Код ЕДРПОУ</label>
+                            <input type="text" minlength="10" maxlength="10" name="edrpoy" class="form-control" data-error="Некоректний формат, введіть 10 цифр" placeholder="1234567890"/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span data-bind="text: currentActivity()"></span>
+                                    <span class="caret"></span>                                    
+                                </button>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a data-bind="click: setActivity" data-bind="click: setActivity">IT</a></li>
+                                                <li><a data-bind="click: setActivity">HR</a></li>
+                                                <li><a data-bind="click: setActivity">Фінанси</a></li>
+                                                <li><a data-bind="click: setActivity">Банк</a></li>
+                                                <li><a data-bind="click: setActivity">Дизайн</a></li>
+                                                <li><a data-bind="click: setActivity">Страхування</a></li>
+                                                <li><a data-bind="click: setActivity">Маркетинг </a></li>
+                                                <li><a data-bind="click: setActivity">Інженерія</a></li>                                        
+                                                <li><a data-bind="click: setActivity">Медицина</a></li>
+                                                <li><a data-bind="click: setActivity">Культура</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a data-bind="click: setActivity">Реклама</a></li>
+                                                <li><a data-bind="click: setActivity">PR</a></li>
+                                                <li><a data-bind="click: setActivity">Сервіс</a></li>
+                                                <li><a data-bind="click: setActivity">Громадські організації</a>
+                                                <li><a data-bind="click: setActivity">Медіа</a></li>
+                                                <li><a data-bind="click: setActivity">Освіта</a></li>
+                                                <li><a data-bind="click: setActivity">Наука</a></li>
+                                                <li><a data-bind="click: setActivity">Прикладні науки</a></li> 
+                                                <li><a data-bind="click: setActivity">Сільське господарство</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a data-bind="click: setActivity">Будівництво</a></li>
+                                                <li><a data-bind="click: setActivity">Архітектура</a></li>
+                                                <li><a data-bind="click: setActivity">Туризм</a></li>
+                                                <li><a data-bind="click: setActivity">Юридична справа</a></li>
+                                                <li><a data-bind="click: setActivity">Зв'язок</a></li>
+                                                <li><a data-bind="click: setActivity">Менеджмент</a></li>
+                                                <li><a data-bind="click: setActivity">Індустрія краси</a></li>
+                                                <li><a data-bind="click: setActivity">Спорт</a></li>
+                                                <li><a data-bind="click: setActivity">Продажі</a></li>                                        
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Місто</label>
+                            <input type="text" class="form-control" name="city" data-error="Заповніть це поле" placeholder="Київ"  required/>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Пароль</label>
+                            <input type="password" class="form-control" name="password" data-error="Заповніть це поле" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">Повторіть пароль</label>
+                            <input type="password" class="form-control" name="password2" data-error="Заповніть це поле" required>
+                            <span class="help-block with-errors"></span>
+                        </div>  
+                        <button type="submit" class="btn btn-block btn-main-green center-block" data-bind="click: createUser">Зареєструватись</button>
+                    </form> 
+                    
+                </div>
+            </div>
+        </div>                
+    </div>
+</div>   
+<!-- Banner END -->
+
+<div class="modal fade" id="wrong-password-popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Помилка</h4>
+      </div>
+      <div class="modal-body">
+        <p>Пароль та повторний пароль мають співпадати</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="regist-success-popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Реєстрація</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        Дякуємо, що зареєструвалися у нас на платформі. Тепер ви можете користуватися всіма
+        функціями сайту: переглядати існуючі курси та події, створювати їх самостійно, приймати 
+        та відхиляти аплікантів.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

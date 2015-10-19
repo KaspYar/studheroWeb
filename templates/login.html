@@ -1,0 +1,104 @@
+<!-- Banner START -->
+<div class="container-fluid" id="login-page">
+    <div class="row">
+        <div class="col-md-12 main-background">
+
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="nav nav-tabs col-md-8">
+                    <li role="presentation" data-bind="click: User().setUser.bind($data, 'student'), css: {'active': User().type() == 'student'}"><a>Студент</a></li>
+                    <li role="presentation" data-bind="click: User().setUser.bind($data, 'company'), css: {'active': User().type() == 'company'}"><a>Компанія</a></li>
+                </ul>
+                <div class="row">  
+                    <div id="student-login-form" data-bind="visible: User().type() == 'student'">
+                        <div class="col-xs-6"> 
+                            <form method="POST" action="" novalidate="novalidate">
+                                <div class="form-group">
+                                    <label for="user-login" class="control-label">Email</label>
+                                    <input type="text" data-bind="value: User().login" class="form-control" id="user-login" required="true"і/>
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user-password" class="control-label">Пароль</label>
+                                    <input type="password" data-bind="value: User().password" class="form-control" id="user-password" required="true"/>
+                                    <span class="help-block"></span>
+                                </div> 
+                                <button data-bind="click: loginStudent" type="submit" class="btn btn-block btn-main-green full">Увійти</button>
+                                <button class="btn btn-block btn-main-green full" data-bind="click: Nav().showRegistration">Зареєструватись</button>
+                                <br/>
+                                <a class="small">Забули пароль?</a>
+                            </form>  
+                        </div>
+                        <div class="col-xs-6 social-registration-block">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="assets/images/social/vk-icon.svg"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="assets/images/social/tw-icon.svg"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="assets/images/social/ok-icon.svg"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="assets/images/social/linkedin-icon.svg"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="assets/images/social/google-icon.svg"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="assets/images/social/fb-icon.svg"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="company-login-form" data-bind="visible: User().type() == 'company'">                    
+                        <div class="col-xs-6 social-registration-block">
+                            
+                        </div>
+                        <div class="col-xs-6"> 
+                            <form method="POST" action="" novalidate="novalidate">
+                                <div class="form-group">
+                                    <label for="username" class="control-label">Email</label>
+                                    <input type="text" class="form-control" data-bind="value: User().login">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">Пароль</label>
+                                    <input type="password" class="form-control"  data-bind="value: User().password">
+                                    <span class="help-block"></span>
+                                </div> 
+                                <button data-bind="click: loginCompany" type="submit" class="btn btn-block btn-main-green full">Увійти</button>
+                                <button class="btn btn-block btn-main-green full" data-bind="click: Nav().showRegistration">Зареєструватись</button>
+                                <br/>
+                                <a class="small">Забули пароль?</a>
+                            </form>  
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>                
+    </div>
+</div>   
+<!-- Banner END -->
+
+<div class="modal fade" id="login-error-popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Помилка</h4>
+      </div>
+      <div class="modal-body">
+        <p>Невірний пароль або логін. Спробуйте ще раз</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div><
+</div>
