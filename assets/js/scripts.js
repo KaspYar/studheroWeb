@@ -20,30 +20,31 @@ function AppViewModel() {
 
 
     /* Bindings for search*/
+    var isSearch = false;
+    var currentActivity_defult ="Сфера діяльності";
+    var currentActivity_start = "Будь-яка";
+    var eventType_defult ="Тип події";
+    var eventType_start = "Будь-який";
+
     self.search_text_value = ko.observable("");
-    var search_text_value_used = "";
     self.search_text_value.subscribe(function(newValue) {
         self.search_text_value(newValue);
         self.search();
     });
 
     /* set toggle buttons value*/
-    var currentActivity_defult ="Сфера діяльності";
-    var currentActivity_start = "Будь-яка";
     self.currentActivity = ko.observable(currentActivity_defult);
-    var currentActivity_used = "";
     self.setActivity = function (data, event) {
         self.currentActivity(event.target.innerHTML);
         self.search();
     }
-    var eventType_defult ="Тип події";
-    var eventType_start = "Будь-який";
     self.eventType = ko.observable(eventType_defult);
-    var eventType_used = "";
     self.setEventType = function (data, event) {
         self.eventType(event.target.innerHTML);
         self.search();
     };
+    /* Bindings for search*/
+
 
     /* on pages loaded events */
     self.currentEvent = ko.observableArray([]);
@@ -94,6 +95,12 @@ function AppViewModel() {
             jQuery("#load-more-btn").removeClass("disabled");
         });
     }
+
+    self.clearEvents =  function () {
+        self.events.removeAll();
+        self.eventsBatch(0);
+    }
+
     self.subscribeToEvent = function () {
         var idStudent = User().getId();
         var idEvent = self.currentEvent().objectId;
@@ -312,24 +319,21 @@ function AppViewModel() {
         search_values = composeSearch(search_values, search_event_type_param);
 
         if (search_values === "") {
-            self.events.removeAll();
-            self.eventsBatch(0);
+            self.clearEvents()
+            isSearch = false;
             self.loadEvents();
         } else {
             var all =
                 start
                 + search_values
                 + end;
-
             self.Ajax().searchEvent(all,
                 function (data) {
                     self.events.removeAll();
                     self.events(data);
                 });
+            isSearch = true;
         }
-        currentActivity_used = self.currentActivity;
-        eventType_used = self.eventType;
-        search_text_value_used = self.search_text_value;
     }
 }
 
