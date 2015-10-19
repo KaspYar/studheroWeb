@@ -29,7 +29,7 @@ function AppViewModel() {
 
     /* set toggle buttons value*/
     var currentActivity_defult ="Сфера діяльності";
-    var common_defult ="Будь-який";
+    var currentActivity_start = "Будь-яка";
     self.currentActivity = ko.observable(currentActivity_defult);
     var currentActivity_used = "";
     self.setActivity = function (data, event) {
@@ -37,6 +37,7 @@ function AppViewModel() {
         self.search();
     }
     var eventType_defult ="Тип події";
+    var eventType_start = "Будь-який";
     self.eventType = ko.observable(eventType_defult);
     var eventType_used = "";
     self.setEventType = function (data, event) {
@@ -287,14 +288,15 @@ function AppViewModel() {
     self.search = function(){
         var start =
             "[";
-        var search_string_param = self.search_text_value() === "" ?"":
-        "{\"paramNames\":[\"title\"],\"paramValue\":\""+self.search_text_value()+"\"}";
+        var search_string_param =
+            self.search_text_value() === "" ?"":
+                "{\"paramNames\":[\"title\",\"descriptionShort\",\"description\"],\"paramValue\":\""+self.search_text_value().replace(/[ '"-]/g,'%');+"\"}";
         var search_current_activity_param =
-            self.currentActivity() === common_defult ||  self.currentActivity() === currentActivity_defult ?"":
-        "{\"paramNames\":[\"activity\"],\"paramValue\":\""+self.currentActivity()+"\"}";
+            (self.currentActivity() === currentActivity_start ||  self.currentActivity() === currentActivity_defult ) ? "":
+                "{\"paramNames\":[\"activity\"],\"paramValue\":\""+self.currentActivity()+"\"}";
         var search_event_type_param =
-            self.eventType() === common_defult ||  self.eventType() === eventType_defult ?"":
-        "{\"paramNames\":[\"type\"],\"paramValue\":\""+self.eventType()+"\"}";
+            (self.eventType() === eventType_start ||  self.eventType() === eventType_defult) ? "":
+                "{\"paramNames\":[\"type\"],\"paramValue\":\""+self.eventType()+"\"}";
         var end = "]";
 
         var search_values = "";
@@ -313,6 +315,7 @@ function AppViewModel() {
             start
             +search_values
             +end;
+
         self.Ajax().searchEvent(all,
             function (data) {
                 self.events.removeAll();
