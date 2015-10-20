@@ -42,8 +42,16 @@
                 </div>
             </div>
             <br/>
-            <button class="btn btn-block btn-main-green center-block" data-bind="click: subscribeToEvent">Підписатись на подію</button>
-
+            <!-- ko if: User().loggedIn() -->
+            <!-- ko if: User().getUser() == 'student'-->
+            <!-- ko ifnot: User().subscribedToCurrent() -->
+                <button class="btn btn-block btn-main-green center-block" data-bind="click: subscribeToEvent">Підписатись на подію</button>
+            <!-- /ko -->
+            <!-- ko if: User().subscribedToCurrent() -->
+            <button class="btn btn-block btn-main-green center-block" data-bind="click: unSubscribeFromEvent">Відписатись від події</button>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
             <div class="col-sm-12">
                 <h3>Коментарі</h3>
             </div>

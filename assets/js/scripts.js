@@ -468,6 +468,10 @@ var User = function () {
         var loggedIn = getCookie("loggedIn");
         return loggedIn && loggedIn == "true";
     });
+    self.subscribedToCurrent = ko.computed(function () {
+        //TODO add logic to this method
+        return false;
+    });
     self.subscribe = function () {
         jQuery('#subscribe-popup').modal('show');
     },
