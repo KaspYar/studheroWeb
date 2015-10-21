@@ -68,6 +68,9 @@ function AppViewModel() {
         if (window.location.pathname === '/events.' + ext) {
             self.loadEvents();
         }
+        if (window.location.pathname === '/moderator123456789.' + ext) {
+            self.loadUnapprovedEvents();
+        }
         ;
         if (window.location.pathname === '/for-students.' + ext) {
             self.User().setUser("student");
@@ -101,6 +104,9 @@ function AppViewModel() {
             }
             jQuery("#load-more-btn").removeClass("disabled");
         });
+    }
+    self.loadUnapprovedEvents = function () {
+        self.loadEvents();
     }
 
     self.clearEvents = function () {
@@ -369,7 +375,8 @@ var Navigation = function () {
         searchPage: "search",
         registrationPage: "registration",
         newEventPage: "create-event",
-        profilePage: "profile"
+        profilePage: "profile",
+        moderatorPage: "moderator123456789"
     };
     var currentPage = window.location.pathname.replace('/', '');
 
@@ -426,6 +433,9 @@ var Navigation = function () {
                     break;
                 case "profile" + ext:
                     document.title = titleMain + sep + "Профайл";
+                    break;
+                case "moderator123456789" + ext:
+                    document.title = titleMain + sep + "Модератор";
                     break;
             }
         },
@@ -487,7 +497,7 @@ var User = function () {
     });
     self.unsubscribe = function () {
         console.log('user().unsubscribe');
-        //jQuery('#unsubscribe-popup').modal('show');
+        jQuery('#unsubscribe-popup').modal('show');
     };
     self.subscribe = function () {
         jQuery('#subscribe-popup').modal('show');

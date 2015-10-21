@@ -1,0 +1,39 @@
+<div class="container-fluid white-bg" id="events">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 container-first events-list">
+                <h2 class="text-center">Модерація подій</h2>
+                </div>
+                <!-- ko foreach: events -->
+                <div class="col-md-4 col-sm-6 col-xs-12 event-block">
+                        <span data-bind="text: $data.objectId" hidden></span>
+                        <div class="name"><span data-bind="text: $data.company"></span>: <span data-bind="text: $data.title"></span></div>
+                        <div class="featured-img">
+                            <div>
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td data-bind="text: $data.descriptionShort"></td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="visible: $data.startDate">Початок: </td>
+                                        <td data-bind="text: $data.startDate"></td>
+                                        <td data-bind="text: $data.startTime"></td>
+                                    </tr>
+                                    <tr>
+                                        <td data-bind="visible: $data.endDate">Кінець:</td>
+                                        <td data-bind="text: $data.endDate"></td>
+                                        <td data-bind="text: $data.endTime"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+                <!-- /ko -->
+
+            </div>
+        </div>
+        <button id="load-more-btn" class="btn btn-block btn-main-dark center-block" data-bind="click: loadEvents">Більше подій</button>
+    </div>
+</div>
