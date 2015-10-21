@@ -21,13 +21,13 @@ function AppViewModel() {
 
     /* Bindings for search*/
     var isSearch = false;
-    var currentActivity_defult ="Сфера діяльності";
+    var currentActivity_defult = "Сфера діяльності";
     var currentActivity_start = "Будь-яка";
-    var eventType_defult ="Тип події";
+    var eventType_defult = "Тип події";
     var eventType_start = "Будь-який";
 
     self.search_text_value = ko.observable("");
-    self.search_text_value.subscribe(function(newValue) {
+    self.search_text_value.subscribe(function (newValue) {
         self.search_text_value(newValue);
         self.search();
     });
@@ -79,6 +79,13 @@ function AppViewModel() {
         ;
 
     });
+    self.subscribedToCurrentEvent = function () {
+        console.log('subscribedToCurrentEvent in Model');
+        var idEvent = self.currentEvent().objectId;
+        var idUser = self.User().getId();
+        //don't know how to implement if user with id idUser is subscriber to event with id idEvent
+        return true;
+    };
 
     self.loadEvents = function () {
         jQuery("#load-more-btn").addClass("disabled");
@@ -96,7 +103,7 @@ function AppViewModel() {
         });
     }
 
-    self.clearEvents =  function () {
+    self.clearEvents = function () {
         self.events.removeAll();
         self.eventsBatch(0);
     }
@@ -106,6 +113,11 @@ function AppViewModel() {
         var idEvent = self.currentEvent().objectId;
         self.Ajax().subscribeToEvent(idStudent, idEvent, self.User().subscribe());
     }
+    self.unSubscribeFromEvent = function () {
+        var idStudent = User().getId();
+        var idEvent = self.currentEvent().objectId;
+        self.Ajax().unsubscribeFromEvent(idStudent, idEvent, self.User().unsubscribe());
+    };
     /*
      jQuery("#upload-photo-form").submit(function(e){
      jQuery.ajax( {
@@ -292,7 +304,7 @@ function AppViewModel() {
         self.Ajax().sendFeedback(postData, callback);
     }
 
-    self.search = function() {
+    self.search = function () {
         var start =
             "[";
         var search_string_param =
@@ -470,19 +482,27 @@ var User = function () {
     });
     self.subscribedToCurrent = ko.computed(function () {
         //TODO add logic to this method
+        console.log('subscribed User()')
         return false;
     });
+    self.unsubscribe = function () {
+        console.log('user().unsubscribe');
+        //jQuery('#unsubscribe-popup').modal('show');
+    };
     self.subscribe = function () {
         jQuery('#subscribe-popup').modal('show');
-    },
-        self.setUser = function (user) {
-            self.type(user);
-            setCookie("user", user, 1);
-        }
+    };
+    self.setUser = function (user) {
+        self.type(user);
+        setCookie("user", user, 1);
+    };
     self.getUser = function () {
         var user = getCookie("user");
         self.type(user);
         return user;
+    };
+    self.getUserInfo = function () {
+        return self.userInfo;
     };
     self.getId = function () {
         return getCookie("userId");
@@ -573,10 +593,10 @@ var Ajax = function () {
             defaultAjax('GET', null, restServer + '/events/limit?from=' + from + '&to=' + to, callback);
         },
         subscribeToEvent: function (idStudent, idEvent, callback) {
-            defaultAjax('GET', null, restServer+'/students/'+idStudent+'/subscribe/'+idEvent, callback);
+            defaultAjax('GET', null, restServer + '/students/' + idStudent + '/subscribe/' + idEvent, callback);
         },
         unsubscribeFromEvent: function (idStudent, idEvent, callback) {
-            defaultAjax('GET', null, restServer+'/students/'+idStudent+'/unsubscribe/'+idEvent, callback);
+            defaultAjax('GET', null, restServer + '/students/' + idStudent + '/unsubscribe/' + idEvent, callback);
         },
         getEvent: function (postData, id, callback) {
             defaultAjax('GET', postData, restServer + '/events/' + id, callback);
