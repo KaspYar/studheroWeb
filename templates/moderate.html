@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 container-first events-list">
-                <h2 class="text-center">Модерація подій</h2>
-                </div>
+                <h2 class="text-center">Події та курси</h2>
                 <!-- ko foreach: events -->
                 <div class="col-md-4 col-sm-6 col-xs-12 event-block">
+                    <a data-bind="click: $root.Nav().moderateEvent">
                         <span data-bind="text: $data.objectId" hidden></span>
                         <div class="name"><span data-bind="text: $data.company"></span>: <span data-bind="text: $data.title"></span></div>
                         <div class="featured-img">
@@ -28,7 +28,14 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- ko ifnot: $data.image -->
+                            <img src="assets/images/event-icon.jpg"/>
+                            <!-- /ko -->
+                            <!-- ko if: $data.image -->
+                            <img src="" data-bind="attr: {src: 'http://89.184.67.220:8080/images/events/' + $data.image}"/>
+                            <!-- /ko -->
                         </div>
+                    </a>
                 </div>
                 <!-- /ko -->
 
@@ -36,4 +43,5 @@
         </div>
         <button id="load-more-btn" class="btn btn-block btn-main-dark center-block" data-bind="click: loadEvents">Більше подій</button>
     </div>
+</div>
 </div>

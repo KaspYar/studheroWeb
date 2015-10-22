@@ -65,6 +65,12 @@ function AppViewModel() {
             });
         }
         ;
+        if (window.location.pathname === '/moderate-event-page.' + ext) {
+            self.Ajax().getEvent(null, getCookie("createdEvent"), function (data) {
+                self.currentEvent(data);
+            });
+        }
+        ;
         if (window.location.pathname === '/events.' + ext) {
             self.loadEvents();
         }
@@ -204,6 +210,25 @@ function AppViewModel() {
         } else {
             self.createCompany();
         }
+    }
+    self.approveEvent = function () {
+        var idEvent = self.currentEvent().objectId;
+        console.log('approve event 1 id: '+idEvent);
+        var data = {
+                objectId: idEvent,
+                approved: true
+        };
+        self.Ajax().updateEvent(JSON.stringify(data), self.User().approveEventPopup());
+    }
+
+    self.declineEvent = function () {
+        var idEvent = self.currentEvent().objectId;
+        console.log('decline event 1 id: '+idEvent);
+        var data = {
+                objectId: idEvent,
+                approved: false
+        };
+        self.Ajax().updateEvent(JSON.stringify(data), self.User().declineEventPopup());
     }
 
     self.createCompany = function () {
@@ -370,6 +395,7 @@ var Navigation = function () {
         indexPage: "index",
         eventsPage: "events",
         eventPage: "event-page",
+        moderateEventPage: "moderate-event-page",
         faqPage: "faq",
         loginPage: "login",
         searchPage: "search",
@@ -401,6 +427,10 @@ var Navigation = function () {
         showEvent: function (data) {
             setCookie("createdEvent", data.objectId, 1);
             window.location.pathname = pages.eventPage + ext;
+        },
+        moderateEvent: function (data) {
+            setCookie("createdEvent", data.objectId, 1);
+            window.location.pathname = pages.moderateEventPage + ext;
         },
         showFAQ: function () {
             window.location.pathname = pages.faqPage + ext;
@@ -498,6 +528,12 @@ var User = function () {
     self.unsubscribe = function () {
         console.log('user().unsubscribe');
         jQuery('#unsubscribe-popup').modal('show');
+    };
+    self.declineEventPopup = function () {
+        jQuery('#decline-popup').modal('show');
+    };
+    self.approveEventPopup = function () {
+        jQuery('#approve-popup').modal('show');
     };
     self.subscribe = function () {
         jQuery('#subscribe-popup').modal('show');
@@ -607,6 +643,10 @@ var Ajax = function () {
         },
         unsubscribeFromEvent: function (idStudent, idEvent, callback) {
             defaultAjax('GET', null, restServer + '/students/' + idStudent + '/unsubscribe/' + idEvent, callback);
+        },
+        updateEvent: function (postData, callback) {
+            console.log('update event'+postData);
+            defaultAjax('POST', postData, restServer + '/events/update', callback);
         },
         getEvent: function (postData, id, callback) {
             defaultAjax('GET', postData, restServer + '/events/' + id, callback);
