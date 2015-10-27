@@ -92,6 +92,8 @@ function AppViewModel() {
         console.log('subscribedToCurrentEvent in Model');
         var idEvent = self.currentEvent().objectId;
         var idUser = self.User().getId();
+        console.log('uId: '+idUser+' eId: '+idEvent);
+        //self.Ajax().isSubscribeDToCurrentEvent(idStudent, idEvent, self.User().isSubscribed());
         //don't know how to implement if user with id idUser is subscriber to event with id idEvent
         return true;
     };
@@ -215,6 +217,14 @@ function AppViewModel() {
         var idEvent = self.currentEvent().objectId;
         console.log('approve event 1 id: '+idEvent);
         var data = {
+                title: jQuery("#moder-event-form input[name=title]").val(),
+                description: jQuery("#moder-event-form textarea[name=description]").val(),
+                descriptionShort: jQuery("#moder-event-form input[name=descriptionShort]").val(),
+                startDate: jQuery("#moder-event-form input[name=startDate]").val(),
+                endDate: jQuery("#moder-event-form input[name=endDate]").val(),
+                startTime: jQuery("#moder-event-form input[name=startTime]").val(),
+                endTime: jQuery("#moder-event-form input[name=endTime]").val(),
+                manager: jQuery("#moder-event-form input[name=manager]").val(),
                 objectId: idEvent,
                 approved: true
         };
@@ -520,11 +530,9 @@ var User = function () {
         var loggedIn = getCookie("loggedIn");
         return loggedIn && loggedIn == "true";
     });
-    self.subscribedToCurrent = ko.computed(function () {
-        //TODO add logic to this method
-        console.log('subscribed User()')
-        return false;
-    });
+    self.isSubscribed = function (data) {
+        console.log('received: '+data);
+    };
     self.unsubscribe = function () {
         console.log('user().unsubscribe');
         jQuery('#unsubscribe-popup').modal('show');
@@ -643,6 +651,9 @@ var Ajax = function () {
         },
         unsubscribeFromEvent: function (idStudent, idEvent, callback) {
             defaultAjax('GET', null, restServer + '/students/' + idStudent + '/unsubscribe/' + idEvent, callback);
+        },
+        isSubscribeDToCurrentEvent: function (idStudent, idEvent, callback) {
+            defaultAjax('GET', null, restServer + '/students/' + 192 + '/isSubscribed/' + 195, callback);
         },
         updateEvent: function (postData, callback) {
             console.log('update event'+postData);

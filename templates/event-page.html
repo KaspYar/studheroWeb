@@ -44,8 +44,12 @@
             <br/>
             <!-- ko if: User().loggedIn() -->
             <!-- ko if: User().getUser() == 'student'-->
+            <!-- ko ifnot: subscribedToCurrentEvent() -->
             <button class="btn btn-block btn-main-green center-block" data-bind="click: subscribeToEvent">Підписатись на подію</button>
+            <!-- /ko -->
+            <!-- ko if: subscribedToCurrentEvent() -->
             <button class="btn btn-block btn-main-green center-block" data-bind="click: unSubscribeFromEvent">Відписатись від події</button>
+            <!-- /ko -->
             <!-- /ko -->
             <!-- /ko -->
             <div class="col-sm-12">

@@ -1,8 +1,8 @@
 <div class="container-fluid white-bg" id="event-page">
+    <form id="moder-event-form">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 container-first">
-                <h2 class="text-center"  data-bind="text: currentEvent().title"></h2>
                 <div class="col-md-12 container-first-event">
                     <div class="col-md-6 image-block">
                         <!-- ko ifnot: currentEvent().image -->
@@ -16,35 +16,46 @@
                         <table>
                             <tbody>
                             <tr>
+                                <td><b>Назва події:</b></td>
+                                <td><input type="text" name="title" data-bind="value: currentEvent().title"></td>
+                            </tr>
+                            <tr>
                                 <td><b>Компанія:</b></td>
                                 <td data-bind="text: currentEvent().company"></td>
                             </tr>
                             <tr>
                                 <td><b>Початок:</b></td>
-                                <td data-bind="text: currentEvent().startDate"></td>
-                                <td data-bind="text: currentEvent().startTime"></td>
+                                <td><input type="text" name="startDate" data-bind="value: currentEvent().startDate"></td>
+                                <td><input type="text" name="startTime" data-bind="value: currentEvent().startTime"></td>
                             </tr>
                             <tr>
                                 <td><b>Кінець:</b></td>
-                                <td data-bind="text: currentEvent().endDate"></td>
-                                <td data-bind="text: currentEvent().endTime"></td>
+                                <td><input type="text" name="endDate" data-bind="value: currentEvent().endDate"></td>
+                                <td><input type="text" name="endTime" data-bind="value: currentEvent().endTime"></td>
+                            </tr>
+                            <tr>
+                                <td><b>Короткий опис:</b></td>
+                                <td><input type="text" name="descriptionShort" data-bind="value: currentEvent().descriptionShort"></td>
                             </tr>
                             <tr>
                                 <td><b>Відповідальна особа:</b></td>
-                                <td data-bind="text: currentEvent().manager"></td>
+                                <td><input type="text" name="manager" data-bind="value: currentEvent().manager"></td>
+                            </tr>
+                            <tr>
+                                <td><b>Опис:</b></td>
+                                <td><textarea name="description" data-bind="value: currentEvent().description"></textarea></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="col-md-8 col-md-offset-2 event-content" data-bind="html: currentEvent().description">
-
                 </div>
             </div>
             <br/>
             <button class="btn btn-block btn-main-green center-block" data-bind="click: approveEvent">Підтвердити</button>
             <button class="btn btn-block btn-main-green center-block" data-bind="click: declineEvent">Забанити</button>
         </div>
+        </form>
 
     </div>
 </div>
@@ -55,11 +66,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Підписатись на подію</h4>
+                <h4 class="modal-title">Підтвердження події</h4>
             </div>
             <div class="modal-body">
-                <p>Вітаємо!</p>
-                <p>Тепер Ви є учасником цієї події. Вона доступна у вашому списку подій в профайлі</p>
+                <p>Подію підтверджено</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
@@ -73,11 +83,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Відписатись від події</h4>
+                <h4 class="modal-title">Відхилення події</h4>
             </div>
             <div class="modal-body">
-                <p>Ви відписались від події :(</p>
-                <p>Тепер її немає у вашому списку подій в профайлі.</p>
+                <p>Подію відхилено</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-block btn-main-green center-block" data-dismiss="modal">OK</button>
